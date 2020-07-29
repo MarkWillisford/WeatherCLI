@@ -1,8 +1,8 @@
 const fetch = require("node-fetch");
 const APIXU_KEY = "797c862b80c857f4df9b3075d1f5a60d";
 
-const fetchNow = async (city) => {
-  const response = await fetch(`https://api.apixu.com/v1/current.json?key=${APIXU_KEY}&q=${city}`);
+const fetchNow = async (city) => { 
+  const response = await fetch(`http://api.weatherstack.com/current?access_key=${APIXU_KEY}&query=${city}`);
   const data = await response.json();
 
   const now = {
@@ -10,15 +10,15 @@ const fetchNow = async (city) => {
     country: data.location.country,
     longitude: data.location.lon,
     latitude: data.location.lat,
-    temparature: data.current.temp_c,
-    condition: data.current.condition.text
+    temperature: data.current.temperature,
+    weather_descriptions: data.current.weather_descriptions
   }
 
   console.log(now)
-};
+}; 
 
-const weatherForecast = async (city) => {
-  const response = await fetch(`https://api.apixu.com/v1/forecast.json?key=${APIXU_KEY}&q=${city}`);
+const weatherForecast = async (city) => { // http://api.weatherstack.com/current?access_key=797c862b80c857f4df9b3075d1f5a60d&query=New%20York
+  const response = await fetch(`http://api.weatherstack.com/forecast?access_key=${APIXU_KEY}&query=${city}`);
   const data = await response.json();
 
   console.log(data.forecast);
